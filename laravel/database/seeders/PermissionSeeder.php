@@ -79,9 +79,5 @@ class PermissionSeeder extends Seeder
 
         $clientRole->givePermissionTo([ 'clientes.*', 'servicios.*' ]);
 
-
-        // $name = config('admin.name');
-        // $admin = User::where('name', $name)->first();
-        // $admin->assignRole('admin');
     }
 }
