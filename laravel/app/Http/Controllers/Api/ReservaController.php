@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Trabajador;
+use App\Models\Reserva;
 use Illuminate\Support\Facades\Storage;
 
-class TrabajadorController extends Controller
+class ReservaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class TrabajadorController extends Controller
     public function index()
     {
         //
-        $trabajadores = Trabajador::all(); 
+        $reservas = Reserva::all(); 
         return response()->json([
             'success' => true,
-            'data'    => $trabajadores
+            'data'    => $reservas
         ], 200);
     }
 
@@ -32,23 +32,27 @@ class TrabajadorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // Validar fitxer
         $validatedData = $request->validate([
-            'Nombre'          => 'required',
-            'Apellido'      => 'required',
-            'Telefono'     => 'required|numeric'
+            'Fecha'          => 'required',
+            'Email'          => 'required',
+            'Telefono'      => 'required|numeric',
+            'ID_Cliente'      => 'required|numeric',
+            'ID_Trabajador'      => 'required|numeric',
+            'ID_Servicio'     => 'required|numeric'
         ]);
 
-        $trabajador = Trabajador::create([
-            'Nombre' =>$request->input('Nombre'),
-            'Apellido' =>$request->input('Apellido'),
+        $reserva = Reserva::create([
+            'Fecha' =>$request->input('Fecha'),
+            'Email' =>$request->input('Email'),
             'Telefono' =>$request->input('Telefono'),
+            'ID_Cliente' =>$request->input('ID_Cliente'),
+            'ID_Trabajador' =>$request->input('ID_Trabajador'),
+            'ID_Servicio' =>$request->input('ID_Servicio')
         ]);
 
         return response()->json([
             'success' => true,
-            'data'    => $trabajador
+            'data'    => $reserva
         ], 201);
         
     }
@@ -61,17 +65,16 @@ class TrabajadorController extends Controller
      */
     public function show($id)
     {
-        //
-        $trabajador = Trabajador::find($id);
-        if ($trabajador){
+        $reserva = Reserva::find($id);
+        if ($reserva){
             return response()->json([
                 'success' => true,
-                'data'    => $trabajador
+                'data'    => $reserva
             ], 200);
         }else{
             return response()->json([
                 'success'  => false,
-                'message' => 'Error, trabajador no encontrado'
+                'message' => 'Error, reserva no encontrada'
             ], 404);
         }
     }
@@ -85,28 +88,36 @@ class TrabajadorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $trabajador = Trabajador::find($id);
-        if ($trabajador){
-            if ($request->input('Nombre')){
-                $trabajador->Nombre=$request->input('Nombre');
+        $reserva = Reserva::find($id);
+        if ($reserva){
+            if ($request->input('Fecha')){
+                $reserva->Fecha=$request->input('Fecha');
             }
-            if ($request->input('Apellido')){
-                $trabajador->Apellido=$request->input('Apellido');
+            if ($request->input('Email')){
+                $reserva->Email=$request->input('Email');
             }
             if ($request->input('Telefono')){
-                $trabajador->Telefono=$request->input('Telefono');
+                $reserva->Telefono=$request->input('Telefono');
             }
-            $trabajador->save();
+            if ($request->input('ID_Cliente')){
+                $reserva->ID_Cliente=$request->input('ID_Cliente');
+            }
+            if ($request->input('ID_Trabajador')){
+                $reserva->ID_Trabajador=$request->input('ID_Trabajador');
+            }
+            if ($request->input('ID_Servicio')){
+                $reserva->ID_Servicio=$request->input('ID_Servicio');
+            }
+            $reserva->save();
 
             return response()->json([
                 'success' => true,
-                'data'    => $trabajador
+                'data'    => $reserva
             ], 201);
         }else{
             return response()->json([
                 'success'  => false,
-                'message' => 'Error, trabajador no encontrado'
+                'message' => 'Error, reserva no encontrada'
             ], 404);
         }
     }
@@ -120,17 +131,17 @@ class TrabajadorController extends Controller
     public function destroy($id)
     {
         //
-        $trabajador = Trabajador::find($id);
-        if ($trabajador){
-            Trabajador::destroy($trabajador->id);
+        $reserva = Reserva::find($id);
+        if ($reserva){
+            Reserva::destroy($reserva->id);
             return response()->json([
                 'success' => true,
-                'data'    => "Trabajador eliminado correctamente"
+                'data'    => "Reserva eliminada correctamente"
             ], 200);
         }else{
             return response()->json([
                 'success'  => false,
-                'message' => 'Error encontrando trabajador'
+                'message' => 'Error encontrando reserva'
             ], 404);
         }
     }

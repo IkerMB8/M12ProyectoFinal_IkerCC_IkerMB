@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -70,17 +71,27 @@ class TokenController extends Controller
     {
             $requests = $request->validate([
                 'name' => 'required',
+                'secondname' => 'required',
                 'email' => 'required|email', 
                 'password' => 'required',
+                'telephone' => 'required|integer',
+                'birthyear' => 'required|required',
             ]);
-
+            $cliente = Cliente::create([
+                'Nombre' => $requests['name'],
+                'Apellido' => $requests['secondname'],
+                'Telefono' => $requests['telephone'],
+                'AnioNacimiento' => $requests['birthyear'],
+            ]);
             $user = User::create([
                 'name' => $requests['name'],
                 'email' => $requests['email'],
                 'password' => Hash::make($requests['password']),
+                'ID_Cliente' => $cliente->id,
             ]);
             $user->assignRole('cliente');
             $token = $user->createToken("authToken")->plainTextToken;
+            
             // Token response
             return response()->json([
                 "success"   => true,

@@ -13,6 +13,8 @@ class Reserva extends Model
 
     protected $fillable = [
         'Fecha',
+        'Email',
+        'Telefono',
         'ID_Cliente',
         'ID_Trabajador',
         'ID_Servicio',

@@ -11,11 +11,13 @@ class Cliente extends Model
 
     protected $table = 'clientes';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'Nombre',
         'Apellido',
         'Telefono',
-        'Anio_nacimiento',
+        'AnioNacimiento',
     ];
 
     public function atenciones()

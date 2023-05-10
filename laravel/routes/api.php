@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TrabajadorController;
 use App\Http\Controllers\Api\TokenController;
+use App\Http\Controllers\Api\ReservaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,6 @@ Route::post('register', [TokenController::class, 'register']);
 
 Route::apiResource('trabajadores', TrabajadorController::class);
 Route::post('trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround']);
+
+Route::apiResource('reservas', ReservaController::class);
+Route::post('reservas/{reserva}', [ReservaController::class, 'update_workaround']);
