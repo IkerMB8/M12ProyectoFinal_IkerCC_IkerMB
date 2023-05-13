@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TrabajadorController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\ReservaController;
+use App\Http\Controllers\Api\ServicioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::post('trabajadores/{trabajador}', [TrabajadorController::class, 'update_w
 
 Route::apiResource('reservas', ReservaController::class);
 Route::post('reservas/{reserva}', [ReservaController::class, 'update_workaround']);
+
+Route::apiResource('servicios', ServicioController::class);
+Route::post('servicios/{servicio}', [ServicioController::class, 'update_workaround']);
