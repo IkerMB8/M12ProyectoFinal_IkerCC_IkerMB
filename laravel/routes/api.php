@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\TrabajadorController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\ReservaController;
 use App\Http\Controllers\Api\ServicioController;
+use App\Http\Controllers\Api\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,11 @@ Route::post('register', [TokenController::class, 'register']);
 Route::apiResource('trabajadores', TrabajadorController::class);
 Route::post('trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround']);
 
+Route::apiResource('clientes', ClienteController::class);
+Route::post('clientes/{cliente}', [ClienteController::class, 'update_workaround']);
+
 Route::apiResource('reservas', ReservaController::class);
+Route::get('/users/{user}/reservas', [ReservaController::class, 'indexByUser']);
 Route::post('reservas/{reserva}', [ReservaController::class, 'update_workaround']);
 
 Route::apiResource('servicios', ServicioController::class);

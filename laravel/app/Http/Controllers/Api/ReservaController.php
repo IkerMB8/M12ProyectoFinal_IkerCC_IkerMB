@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reserva;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class ReservaController extends Controller
 {
@@ -18,6 +19,22 @@ class ReservaController extends Controller
     {
         //
         $reservas = Reserva::all(); 
+        return response()->json([
+            'success' => true,
+            'data'    => $reservas
+        ], 200);
+    }
+    
+    /**
+     * Display a listing of the resource filtered by ID.
+     *
+     * @param App\Models\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByUser(User $user)
+    {
+        //
+        $reservas = $user->client->reservas;
         return response()->json([
             'success' => true,
             'data'    => $reservas
@@ -36,7 +53,7 @@ class ReservaController extends Controller
             'Fecha'          => 'required',
             'Email'          => 'required',
             'Telefono'      => 'required|numeric',
-            'ID_Cliente'      => 'required|numeric',
+            'ID_Cliente'      => 'numeric',
             'ID_Trabajador'      => 'required|numeric',
             'ID_Servicio'     => 'required|numeric'
         ]);
