@@ -33,6 +33,7 @@ Route::apiResource('/trabajadores', TrabajadorController::class);
 Route::post('/trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround']);
 
 Route::apiResource('clientes', ClienteController::class);
+Route::get('user/cliente', [ClienteController::class, 'obtenerClienteDeUsuario'])->middleware(['auth:sanctum']);;
 Route::post('/clientes/{cliente}', [ClienteController::class, 'update_workaround']);
 
 Route::apiResource('reservas', ReservaController::class);

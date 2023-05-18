@@ -25,6 +25,28 @@ class ClienteController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function obtenerClienteDeUsuario()
+    {
+        if (auth()->check()) {
+            $usuario = auth()->user();
+            if ($usuario->client) {
+                $cliente = $usuario->client;
+                return response()->json([
+                    'success' => true,
+                    'data'    => $cliente
+                ], 201);
+            }
+            return response()->json(['mensaje' => 'El usuario no tiene un cliente asociado'], 404);
+        } else {
+            return response()->json(['mensaje' => 'El usuario no está autenticado'], 404);
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
