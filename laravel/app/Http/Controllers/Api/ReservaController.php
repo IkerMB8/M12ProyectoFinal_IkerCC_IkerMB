@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Reserva;
@@ -42,6 +43,24 @@ class ReservaController extends Controller
     }
 
     /**
+     * Display a listing of the resource filtered by the current date.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getReservasDia(Request $request)
+    {
+        $fechaActual = Carbon::now()->toDateString();
+    
+        $reservas = Reserva::whereDate('Fecha', '>=', $fechaActual)->get();
+    
+        return response()->json([
+            'success' => true,
+            'data' => $reservas
+        ], 200);
+    }
+    
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -57,6 +76,15 @@ class ReservaController extends Controller
             'ID_Trabajador'      => 'required|numeric',
             'ID_Servicio'     => 'required|numeric'
         ]);
+
+        $fecha = $request->input('Fecha');
+        $citaExistente = Reserva::where('Fecha', $fecha)->first();
+        if ($citaExistente) {
+            return response()->json([
+                'success' => false,
+                'message' => 'La hora seleccionada ya está ocupada'
+            ], 400);
+        }
 
         $reserva = Reserva::create([
             'Fecha' =>$request->input('Fecha'),
@@ -105,39 +133,53 @@ class ReservaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validar los datos de entrada aquí...
+        $validatedData = $request->validate([
+            'Fecha' => 'sometimes|required',
+            'Email' => 'sometimes|required',
+            'Telefono' => 'sometimes|required|numeric',
+            'ID_Cliente' => 'sometimes|numeric',
+            'ID_Trabajador' => 'sometimes|required|numeric',
+            'ID_Servicio' => 'sometimes|required|numeric'
+        ]);
+
         $reserva = Reserva::find($id);
-        if ($reserva){
-            if ($request->input('Fecha')){
-                $reserva->Fecha=$request->input('Fecha');
+        if ($reserva) {
+            $fecha = $request->input('Fecha');
+            // Comprobar si la hora ya está ocupada
+            $horasOcupadas = Reserva::where('Fecha', $fecha)->where('id', '!=', $id)->count();
+            if ($horasOcupadas > 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'La hora seleccionada ya está ocupada'
+                ], 400);
             }
-            if ($request->input('Email')){
-                $reserva->Email=$request->input('Email');
-            }
-            if ($request->input('Telefono')){
-                $reserva->Telefono=$request->input('Telefono');
-            }
-            if ($request->input('ID_Cliente')){
-                $reserva->ID_Cliente=$request->input('ID_Cliente');
-            }
-            if ($request->input('ID_Trabajador')){
-                $reserva->ID_Trabajador=$request->input('ID_Trabajador');
-            }
-            if ($request->input('ID_Servicio')){
-                $reserva->ID_Servicio=$request->input('ID_Servicio');
-            }
+
+            $reserva->fill(array_filter($request->only([
+                'Fecha',
+                'Email',
+                'Telefono',
+                'ID_Cliente',
+                'ID_Trabajador',
+                'ID_Servicio'
+            ])));
+
             $reserva->save();
 
             return response()->json([
                 'success' => true,
-                'data'    => $reserva
-            ], 201);
-        }else{
+                'data'    => $reserva,
+                'message' => 'Cita creada correctamente'
+            ], 200);
+        } else {
             return response()->json([
-                'success'  => false,
+                'success' => false,
                 'message' => 'Error, reserva no encontrada'
             ], 404);
         }
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -153,7 +195,7 @@ class ReservaController extends Controller
             Reserva::destroy($reserva->id);
             return response()->json([
                 'success' => true,
-                'data'    => "Reserva eliminada correctamente"
+                'message'    => "Reserva eliminada correctamente"
             ], 200);
         }else{
             return response()->json([
