@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mime\Message;
+use Symfony\Component\Mime\Part\TextPart;
 
 class EmailController extends Controller
 {
@@ -44,6 +46,10 @@ class EmailController extends Controller
         $content .= '<br>Correo electrónico: ' . $formData['email'];
         $content .= '<br>Mensaje: ' . $formData['mensaje'];
 
-        return "<h2>$title</h2><p>$content</p>";
+        $textPart = new TextPart($content);
+
+        return (new Message())
+            ->setSubject($title)
+            ->setBody($textPart);
     }
 }
