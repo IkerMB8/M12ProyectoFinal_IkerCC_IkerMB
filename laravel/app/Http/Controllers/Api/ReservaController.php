@@ -35,7 +35,7 @@ class ReservaController extends Controller
     public function indexByUser(User $user)
     {
         //
-        $reservas = auth()->user->client->reservas;
+        $reservas = auth()->user()->client->reservas;
         return response()->json([
             'success' => true,
             'data'    => $reservas
