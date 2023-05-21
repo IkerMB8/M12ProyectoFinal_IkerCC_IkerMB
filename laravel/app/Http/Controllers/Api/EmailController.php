@@ -39,7 +39,7 @@ class EmailController extends Controller
         $title = $isRecipient ? 'Nuevo mensaje de contacto' : 'Confirmación de envío de mensaje';
         $content = $isRecipient ? 'Has recibido un nuevo mensaje de contacto.' : 'Gracias por tu mensaje. Hemos recibido tu consulta y te responderemos pronto.';
         $content .= '<br><br>Detalles del mensaje:';
-        $content .= '<br>Nombres: ' . $formData['names'];
+        $content .= '<br>Nombres: ' . $formData['name'];
         $content .= '<br>Teléfono: ' . ($formData['phone'] ?? '-');
         $content .= '<br>Correo electrónico: ' . $formData['email'];
         $content .= '<br>Mensaje: ' . $formData['mensaje'];
