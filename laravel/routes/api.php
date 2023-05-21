@@ -37,7 +37,7 @@ Route::get('user/cliente', [ClienteController::class, 'obtenerClienteDeUsuario']
 Route::post('/clientes/{cliente}', [ClienteController::class, 'update_workaround']);
 
 Route::apiResource('reservas', ReservaController::class);
-Route::get('/users/{user}/reservas', [ReservaController::class, 'indexByUser']);
+Route::get('/user/reservas', [ReservaController::class, 'indexByUser']);
 Route::get('/dia/reservas', [ReservaController::class, 'getReservasDia']);
 Route::post('/reservas/{reserva}', [ReservaController::class, 'update_workaround']);
 
