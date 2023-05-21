@@ -106,7 +106,7 @@ class ServicioController extends Controller
         }else{
             return response()->json([
                 'success'  => false,
-                'message' => 'Error, trabajador no encontrado'
+                'message' => 'Error, servicio no encontrado'
             ], 404);
         }
     }
@@ -125,12 +125,12 @@ class ServicioController extends Controller
             Servicio::destroy($servicio->id);
             return response()->json([
                 'success' => true,
-                'data'    => "Trabajador eliminado correctamente"
+                'data'    => "Servicio eliminado correctamente"
             ], 200);
         }else{
             return response()->json([
                 'success'  => false,
-                'message' => 'Error encontrando trabajador'
+                'message' => 'Error encontrando servicio'
             ], 404);
         }
     }
