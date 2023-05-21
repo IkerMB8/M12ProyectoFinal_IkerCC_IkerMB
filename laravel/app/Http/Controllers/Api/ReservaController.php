@@ -34,13 +34,23 @@ class ReservaController extends Controller
      */
     public function indexByUser(User $user)
     {
-        //
-        $reservas = auth()->user()->client->reservas;
+        $reservas = auth()->user()->client->reservas()->with('servicio', 'trabajador')->get();
+
+        $reservasData = $reservas->map(function ($reserva) {
+            return [
+                'id' => $reserva->id,
+                'fecha' => $reserva->Fecha,
+                'servicio' => $reserva->servicio->nombre,
+                'trabajador' => $reserva->trabajador->nombre,
+            ];
+        });
+
         return response()->json([
             'success' => true,
-            'data'    => $reservas
+            'data' => $reservasData
         ], 200);
     }
+
 
     /**
      * Display a listing of the resource filtered by the current date.
