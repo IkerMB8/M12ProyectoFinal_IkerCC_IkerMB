@@ -19,11 +19,11 @@ class Servicio extends Model
 
     public function trabajador()
     {
-        return $this->belongsTo('App\Trabajador', 'id_trabajador');
+        return $this->belongsTo(Trabajador::class, 'id_trabajador');
     }
 
     public function reservas()
     {
-        return $this->hasMany('App\Reserva', 'id_servicio');
+        return $this->hasMany(Reserva::class, 'id_servicio');
     }
 }

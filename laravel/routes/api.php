@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ReservaController;
 use App\Http\Controllers\Api\ServicioController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\StripeController;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,5 @@ Route::apiResource('servicios', ServicioController::class);
 Route::post('/servicios/{servicio}', [ServicioController::class, 'update_workaround']);
 
 Route::post('/checkout', [StripeController::class, 'checkout']);
+
+Route::post('/send-email', [EmailController::class, 'sendEmail']);

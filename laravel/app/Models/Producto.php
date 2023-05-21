@@ -9,11 +9,11 @@ class Producto extends Model
 {
     use HasFactory;
     protected $table = 'productos';
+    public $timestamps = false;
     protected $fillable = [
-        'Nombre', 
-        'Descripcion', 
-        'Cantidad', 
-        'Precio'
+        'name', 
+        'price', 
+        'image', 
     ];
 
     public function lineasCompra()
