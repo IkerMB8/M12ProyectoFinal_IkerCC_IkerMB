@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\ReservaController;
 use App\Http\Controllers\Api\ServicioController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\StripeController;
-use App\Http\Controllers\EmailController;
+use App\Http\Controllers\Api\EmailController;
 
 /*
 |--------------------------------------------------------------------------
