@@ -41,7 +41,7 @@ class ReservaController extends Controller
                 'id' => $reserva->id,
                 'fecha' => $reserva->Fecha,
                 'servicio' => $reserva->servicio->Nombre,
-                'trabajador' => $reserva->trabajador->Nombre,
+                'trabajador' => $reserva->trabajador->Nombre+" "+$reserva->trabajador->Apellido,
             ];
         });
 
