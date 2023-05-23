@@ -49,6 +49,7 @@ class ProductoCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->authorizeRoles(['admin', 'trabajador']);
+        CRUD::column('id');
         CRUD::column('name');
         CRUD::column('price');
         CRUD::column('image');
@@ -71,6 +72,7 @@ class ProductoCrudController extends CrudController
         $this->authorizeRoles(['admin', 'trabajador']);
         CRUD::setValidation(ProductoRequest::class);
 
+        CRUD::field('id');
         CRUD::field('name');
         CRUD::field('price');
         CRUD::field('image');
