@@ -32,8 +32,11 @@ Route::post('logout', [TokenController::class, 'logout'])->middleware(['auth:san
 Route::post('login', [TokenController::class, 'login']);
 Route::post('register', [TokenController::class, 'register']);
 
-Route::apiResource('/trabajadores', TrabajadorController::class);
-Route::post('/trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround']);
+Route::post('/trabajadores', [TrabajadorController::class, 'store'])->middleware(['auth:sanctum']);
+Route::put('/trabajadores/{trabajador}', [TrabajadorController::class, 'update'])->middleware(['auth:sanctum']);
+Route::put('/trabajadores/{trabajador}', [TrabajadorController::class, 'destroy'])->middleware(['auth:sanctum']);
+Route::get('/trabajadores', [TrabajadorController::class, 'index']);
+Route::get('/trabajadores/{trabajador}', [TrabajadorController::class, 'show']);
 
 Route::apiResource('/productos', ProductoController::class)->middleware(['auth:sanctum']);
 Route::post('/productos/{producto}', [ProductoController::class, 'update_workaround'])->middleware(['auth:sanctum']);
