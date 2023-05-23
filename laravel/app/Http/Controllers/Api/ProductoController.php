@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:productos.list')->only('index');
+        $this->middleware('permission:productos.create')->only(['create','store']);
+        $this->middleware('permission:productos.read')->only('show');
+        $this->middleware('permission:productos.update')->only(['edit','update']);
+        $this->middleware('permission:productos.delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

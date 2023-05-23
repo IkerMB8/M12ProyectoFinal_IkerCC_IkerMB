@@ -23,19 +23,26 @@ class PermissionSeeder extends Seeder
         $workerRole = Role::create(['name' => 'trabajador']);
         $clientRole = Role::create(['name' => 'cliente']);
 
-        Permission::create(['name' => 'trabajadores.*']);
-        Permission::create(['name' => 'trabajadores.list']);
-        Permission::create(['name' => 'trabajadores.create']);
-        Permission::create(['name' => 'trabajadores.update']);
-        Permission::create(['name' => 'trabajadores.read']);
-        Permission::create(['name' => 'trabajadores.delete']);
-
         Permission::create(['name' => 'clientes.*']);
         Permission::create(['name' => 'clientes.list']);
         Permission::create(['name' => 'clientes.create']);
         Permission::create(['name' => 'clientes.update']);
         Permission::create(['name' => 'clientes.read']);
         Permission::create(['name' => 'clientes.delete']);
+        
+        Permission::create(['name' => 'productos.*']);
+        Permission::create(['name' => 'productos.list']);
+        Permission::create(['name' => 'productos.create']);
+        Permission::create(['name' => 'productos.update']);
+        Permission::create(['name' => 'productos.read']);
+        Permission::create(['name' => 'productos.delete']);
+
+        Permission::create(['name' => 'reservas.*']);
+        Permission::create(['name' => 'reservas.list']);
+        Permission::create(['name' => 'reservas.create']);
+        Permission::create(['name' => 'reservas.update']);
+        Permission::create(['name' => 'reservas.read']);
+        Permission::create(['name' => 'reservas.delete']);
 
         Permission::create(['name' => 'servicios.*']);
         Permission::create(['name' => 'servicios.list']);
@@ -44,40 +51,26 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'servicios.read']);
         Permission::create(['name' => 'servicios.delete']);
 
-        Permission::create(['name' => 'compras.*']);
-        Permission::create(['name' => 'compras.list']);
-        Permission::create(['name' => 'compras.create']);
-        Permission::create(['name' => 'compras.update']);
-        Permission::create(['name' => 'compras.read']);
-        Permission::create(['name' => 'compras.delete']);
-
-        Permission::create(['name' => 'chats.*']);
-        Permission::create(['name' => 'chats.list']);
-        Permission::create(['name' => 'chats.create']);
-        Permission::create(['name' => 'chats.update']);
-        Permission::create(['name' => 'chats.read']);
-        Permission::create(['name' => 'chats.delete']);
-
-        Permission::create(['name' => 'mensajes.*']);
-        Permission::create(['name' => 'mensajes.list']);
-        Permission::create(['name' => 'mensajes.create']);
-        Permission::create(['name' => 'mensajes.update']);
-        Permission::create(['name' => 'mensajes.read']);
-        Permission::create(['name' => 'mensajes.delete']);
-
         Permission::create(['name' => 'users.*']);
         Permission::create(['name' => 'users.list']);
         Permission::create(['name' => 'users.create']);
         Permission::create(['name' => 'users.update']);
         Permission::create(['name' => 'users.read']);
         Permission::create(['name' => 'users.delete']);
+        
+        Permission::create(['name' => 'trabajadores.*']);
+        Permission::create(['name' => 'trabajadores.list']);
+        Permission::create(['name' => 'trabajadores.create']);
+        Permission::create(['name' => 'trabajadores.update']);
+        Permission::create(['name' => 'trabajadores.read']);
+        Permission::create(['name' => 'trabajadores.delete']);
 
 
-        $adminRole->givePermissionTo([ 'trabajadores.*', 'clientes.*', 'servicios.*','users.*', 'mensajes.*', 'chats.*', 'compras.*' ]);
+        $adminRole->givePermissionTo([ 'clientes.*', 'productos.*', 'reservas.*', 'servicios.*', 'users.*', 'trabajadores.*' ]);
 
-        $workerRole->givePermissionTo([ 'trabajadores.list', 'trabajadores.read', 'clientes.list', 'clientes.read', 'servicios.list', 'servicios.read' ]);
+        $workerRole->givePermissionTo([ 'clientes.*', 'productos.*', 'reservas.*', 'servicios.*', 'trabajadores.list', 'trabajadores.read',  'users.list', 'users.read' ]);
 
-        $clientRole->givePermissionTo([ 'clientes.*', 'servicios.*' ]);
+        $clientRole->givePermissionTo([ 'clientes.read', 'reservas.read', 'reservas.list', 'servicios.read', 'servicios.list', 'trabajadores.list', 'trabajadores.read', 'users.read']);
 
     }
 }

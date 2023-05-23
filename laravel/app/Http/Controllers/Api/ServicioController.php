@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ServicioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:servicios.list')->only('index');
+        $this->middleware('permission:servicios.create')->only(['create','store']);
+        $this->middleware('permission:servicios.read')->only('show');
+        $this->middleware('permission:servicios.update')->only(['edit','update']);
+        $this->middleware('permission:servicios.delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

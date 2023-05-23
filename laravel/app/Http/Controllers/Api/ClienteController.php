@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:clientes.list')->only('index');
+        $this->middleware('permission:clientes.create')->only(['create','store']);
+        $this->middleware('permission:clientes.read')->only('show');
+        $this->middleware('permission:clientes.update')->only(['edit','update']);
+        $this->middleware('permission:clientes.delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -32,23 +32,23 @@ Route::post('logout', [TokenController::class, 'logout'])->middleware(['auth:san
 Route::post('login', [TokenController::class, 'login']);
 Route::post('register', [TokenController::class, 'register']);
 
-Route::apiResource('/trabajadores', TrabajadorController::class);
-Route::post('/trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround']);
+Route::apiResource('/trabajadores', TrabajadorController::class)->middleware(['auth:sanctum']);
+Route::post('/trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround'])->middleware(['auth:sanctum']);
 
-Route::apiResource('/productos', ProductoController::class);
-Route::post('/productos/{producto}', [ProductoController::class, 'update_workaround']);
+Route::apiResource('/productos', ProductoController::class)->middleware(['auth:sanctum']);
+Route::post('/productos/{producto}', [ProductoController::class, 'update_workaround'])->middleware(['auth:sanctum']);
 
-Route::apiResource('clientes', ClienteController::class);
+Route::apiResource('clientes', ClienteController::class)->middleware(['auth:sanctum']);
 Route::get('user/cliente', [ClienteController::class, 'obtenerClienteDeUsuario'])->middleware(['auth:sanctum']);
-Route::post('/clientes/{cliente}', [ClienteController::class, 'update_workaround']);
+Route::post('/clientes/{cliente}', [ClienteController::class, 'update_workaround'])->middleware(['auth:sanctum']);
 
 Route::apiResource('reservas', ReservaController::class);
 Route::get('/user/reservas', [ReservaController::class, 'indexByUser'])->middleware(['auth:sanctum']);
 Route::get('/dia/reservas', [ReservaController::class, 'getReservasDia']);
 Route::post('/reservas/{reserva}', [ReservaController::class, 'update_workaround']);
 
-Route::apiResource('servicios', ServicioController::class);
-Route::post('/servicios/{servicio}', [ServicioController::class, 'update_workaround']);
+Route::apiResource('servicios', ServicioController::class)->middleware(['auth:sanctum']);
+Route::post('/servicios/{servicio}', [ServicioController::class, 'update_workaround'])->middleware(['auth:sanctum']);
 
 Route::post('/checkout', [StripeController::class, 'checkout']);
 
