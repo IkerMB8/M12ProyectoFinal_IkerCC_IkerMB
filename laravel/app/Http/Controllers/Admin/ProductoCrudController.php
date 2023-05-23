@@ -49,20 +49,10 @@ class ProductoCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->authorizeRoles(['admin', 'trabajador']);
-        CRUD::addColumn([
-            'name' => 'id',
-            'label' => 'ID',
-            'type' => 'text',
-        ]);
+        CRUD::column('id_stripe');
         CRUD::column('name');
         CRUD::column('price');
         CRUD::column('image');
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
     /**
@@ -76,16 +66,10 @@ class ProductoCrudController extends CrudController
         $this->authorizeRoles(['admin', 'trabajador']);
         CRUD::setValidation(ProductoRequest::class);
 
-        CRUD::field('id');
+        CRUD::field('id_stripe');
         CRUD::field('name');
         CRUD::field('price');
         CRUD::field('image');
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

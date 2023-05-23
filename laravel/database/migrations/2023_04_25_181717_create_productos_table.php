@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
+            $table->string('id_stripe');
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->string('image');
