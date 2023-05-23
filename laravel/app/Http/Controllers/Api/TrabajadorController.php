@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class TrabajadorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:productos.create')->only(['create','store']);
+        $this->middleware('permission:productos.update')->only(['edit','update']);
+        $this->middleware('permission:productos.delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -50,8 +50,11 @@ Route::get('/user/reservas', [ReservaController::class, 'indexByUser'])->middlew
 Route::get('/dia/reservas', [ReservaController::class, 'getReservasDia']);
 Route::post('/reservas/{reserva}', [ReservaController::class, 'update_workaround']);
 
-Route::apiResource('servicios', ServicioController::class);
-Route::post('/servicios/{servicio}', [ServicioController::class, 'update_workaround']);
+Route::post('/servicios', [ServicioController::class, 'store'])->middleware(['auth:sanctum']);
+Route::put('/servicios/{servicio}', [ServicioController::class, 'update'])->middleware(['auth:sanctum']);
+Route::put('/servicios/{servicio}', [ServicioController::class, 'destroy'])->middleware(['auth:sanctum']);
+Route::get('/servicios', [ServicioController::class, 'index']);
+Route::get('/servicios/{servicio}', [ServicioController::class, 'show']);
 
 Route::post('/checkout', [StripeController::class, 'checkout']);
 
