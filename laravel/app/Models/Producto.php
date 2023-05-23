@@ -13,6 +13,7 @@ class Producto extends Model
     protected $table = 'productos';
     public $timestamps = false;
     protected $fillable = [
+        'id', 
         'name', 
         'price', 
         'image', 
