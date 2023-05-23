@@ -11,3 +11,4 @@
 @else
    {{ __("Only admins and employees can see this section") }}
 @endhasanyrole
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('reserva') }}"><i class="nav-icon la la-question"></i> Reservas</a></li>
