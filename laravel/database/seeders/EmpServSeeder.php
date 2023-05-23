@@ -11,36 +11,42 @@ class EmpServSeeder extends Seeder
 {
    public function run()
    {
-    new Servicio([
+    $servicio1 = new Servicio([
         'Nombre'      => "Corte Barba",
         'Tipo'     => "Corte",
         'Precio'  => "5.99",
     ]);
-    new Servicio([
+    $servicio1->save();
+    $servicio2 = new Servicio([
         'Nombre'      => "Color mujer",
         'Tipo'     => "Color",
         'Precio'  => "45.99",
     ]);
-    new Servicio([
+    $servicio2->save();
+    $servicio3 = new Servicio([
         'Nombre'      => "Corte Hombre",
         'Tipo'     => "Corte",
         'Precio'  => "18.99",
     ]);
-    new Trabajador([
+    $servicio3->save();
+    $christian = new Trabajador([
         'Nombre'      => "Christian",
         'Apellido'     => "Rios",
         'Telefono'  => "600123123",
     ]);
-    new Trabajador([
+    $christian->save();
+    $claudio = new Trabajador([
         'Nombre'      => "Claudio",
         'Apellido'     => "Guirao",
         'Telefono'  => "600123124",
     ]);
-    new Trabajador([
+    $claudio->save();
+    $jana =  new Trabajador([
         'Nombre'      => "Jana",
         'Apellido'     => "Feixes",
         'Telefono'  => "600123125",
     ]);
+    $jana->save();
     }
 }
 
