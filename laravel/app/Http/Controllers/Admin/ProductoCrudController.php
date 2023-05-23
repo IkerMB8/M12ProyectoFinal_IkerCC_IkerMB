@@ -53,7 +53,6 @@ class ProductoCrudController extends CrudController
             'name' => 'id',
             'label' => 'ID',
             'type' => 'text',
-            'prefix' => 'price_',
         ]);
         CRUD::column('name');
         CRUD::column('price');
