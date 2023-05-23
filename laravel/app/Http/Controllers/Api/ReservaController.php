@@ -88,7 +88,9 @@ class ReservaController extends Controller
         ]);
 
         $fecha = $request->input('Fecha');
-        $citaExistente = Reserva::where('Fecha', $fecha)->first();
+        $citaExistente = Reserva::where('Fecha', $fecha)
+                         ->where('ID_Trabajador', $request->input('ID_Trabajador'))
+                         ->first();
         if ($citaExistente) {
             return response()->json([
                 'success' => false,
