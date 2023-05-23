@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ID_Compra');
             $table->integer('Cantidad');
             $table->decimal('Descuento', 10, 2);
-            $table->string('ID_Producto');
+            $table->unsignedBigInteger('ID_Producto');
             $table->primary(['NumLinea', 'ID_Compra']);
             $table->foreign('ID_Compra')->references('id')->on('compras')->onDelete('cascade');
             $table->foreign('ID_Producto')->references('id')->on('productos');
