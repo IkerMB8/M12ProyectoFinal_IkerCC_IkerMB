@@ -26,8 +26,8 @@ class StripeController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => $arrayItems,
             'mode' => 'payment',
-            'success_url' => 'http://localhost:5173/success',
-            'cancel_url' => 'http://localhost:5173/cancel',
+            'success_url' => 'http://client11.insjoaquimmir.cat/success',
+            'cancel_url' => 'http://client11.insjoaquimmir.cat/cancel',
         ]);
 
         return response()->json([
