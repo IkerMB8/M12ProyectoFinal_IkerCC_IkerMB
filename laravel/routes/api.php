@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\ServicioController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\Api\EmailController;
+use App\Http\Controllers\Api\ProductoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,9 @@ Route::post('register', [TokenController::class, 'register']);
 
 Route::apiResource('/trabajadores', TrabajadorController::class);
 Route::post('/trabajadores/{trabajador}', [TrabajadorController::class, 'update_workaround']);
+
+Route::apiResource('/productos', ProductoController::class);
+Route::post('/productos/{producto}', [ProductoController::class, 'update_workaround']);
 
 Route::apiResource('clientes', ClienteController::class);
 Route::get('user/cliente', [ClienteController::class, 'obtenerClienteDeUsuario'])->middleware(['auth:sanctum']);
