@@ -77,6 +77,15 @@ class TokenController extends Controller
                 'telephone' => 'required|integer',
                 'birthyear' => 'required|required',
             ]);
+
+            $existingUser = User::where('email', $requests['email'])->first();
+            if ($existingUser) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'El correo electrónico ya está registrado.',
+                ], 400);
+            }
+            
             $cliente = Cliente::create([
                 'Nombre' => $requests['name'],
                 'Apellido' => $requests['secondname'],
